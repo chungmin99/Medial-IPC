@@ -1,7 +1,7 @@
 #include "FemModel.h"
-//#include "IsotropicMaterial\StvkIsotropicMaterial.h"
-//#include "IsotropicMaterial\NeoHookeanIsotropicMaterial.h"
-#include "Commom\SparseMatrixTopology.h"
+//#include "IsotropicMaterial/StvkIsotropicMaterial.h"
+//#include "IsotropicMaterial/NeoHookeanIsotropicMaterial.h"
+#include "Commom/SparseMatrixTopology.h"
 
 namespace FiniteElementMethod
 {

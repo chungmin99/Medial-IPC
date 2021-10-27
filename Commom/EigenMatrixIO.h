@@ -68,7 +68,7 @@ namespace EigenMatrixIO {
 		out.write((char*)&nnz, sizeof(int));
 
 		for (int k = 0; k < sp.outerSize(); ++k)
-			for (Eigen::SparseMatrix<T>::InnerIterator it(sp, k); it; ++it)
+			for (typename Eigen::SparseMatrix<T>::InnerIterator it(sp, k); it; ++it)
 			{
 				int row = it.row();
 				int col = it.col();

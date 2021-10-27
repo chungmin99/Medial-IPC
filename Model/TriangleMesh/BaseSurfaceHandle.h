@@ -2,7 +2,7 @@
 #ifndef BASE_SURFACE_HANDLE_H
 #define BASE_SURFACE_HANDLE_H
 #include "BaseSurfaceMesh.h"
-#include "Commom\DataStructure\DataSet.h"
+#include "Commom/DataStructure/DataSet.h"
 
 typedef DataSet<int> BaseSurfaceFaceSet;
 typedef DataSet<int> BaseSurfacePointSet;

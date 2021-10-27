@@ -1,7 +1,7 @@
 #pragma once
 #ifndef BASE_Scene_H
 #define BASE_Scene_H
-#include <windows.h>
+// #include <windows.h>
 #include <QGLViewer/qglviewer.h>
 #include <QOpenGLFunctions>
 #include <QOpenGLFramebufferObject>
@@ -20,11 +20,11 @@
 
 #include "StandardCamera.h"
 #include "BaseLighting.h"
-#include "Model\GeometryElement.h"
-#include "Shader\ShaderProgram.h"
-#include "Shader\ScreenFontType.h"
-#include "Commom\tinyxml\tinyxml.h"
-#include "Simulator\BaseSimulator.h"
+#include "Model/GeometryElement.h"
+#include "Shader/ShaderProgram.h"
+#include "Shader/ScreenFontType.h"
+#include "Commom/tinyxml/tinyxml.h"
+#include "Simulator/BaseSimulator.h"
 
 //select
 enum SelectionMode {

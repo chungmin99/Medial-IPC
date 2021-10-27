@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include "Commom\DataConversion.h"
+#include "Commom/DataConversion.h"
 
 void BaseLight::transferToShader(QOpenGLShaderProgram * program, unsigned int lightId)
 {

@@ -4,11 +4,11 @@
 
 #include <memory>
 #include <vector>
-#include "Commom\BufferSerialization.h"
-#include "Model\GeometryElement.h"
+#include "Commom/BufferSerialization.h"
+#include "Model/GeometryElement.h"
 #include "BaseMedialMeshBufferPool.h"
 #include <QGLViewer/vec.h>
-#include <QGLViewer/Quaternion.h>
+#include <QGLViewer/quaternion.h>
 #include "MatrixCore.h"
 
 class BaseMedialMeshBuffer

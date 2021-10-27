@@ -28,9 +28,9 @@
     <UseIntelTBB>true</UseIntelTBB>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+  <!-- <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
     <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IncludePath>.\;$(QT_INCLUDE);.\external\qucsdk\include;$(QGLVIEWER_INCLUDE);$(EIGEN_INCLUDE);$(FREETYPE_INCLUDE);$(CUDA_PATH)\include;$(NVCUDASAMPLES_ROOT)\common\inc\;$(MKL_PATH)\include;$(IncludePath)</IncludePath>

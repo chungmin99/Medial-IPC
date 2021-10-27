@@ -131,8 +131,8 @@ namespace StlTextIO
 	template <typename T>
 	void writeOneLevelVector(std::ofstream& fout, std::vector<T>& vec)
 	{
-		fout << size << std::endl;
-		for (int i = 0; i < size; i++)
+		fout << vec->size() << std::endl;
+		for (int i = 0; i < vec->size(); i++)
 			fout << vec[i] << std::endl;
 	}
 
@@ -163,7 +163,7 @@ namespace StlTextIO
 				fout << inner_size;
 				if (inner_size != 0)
 				{
-					for (int j = 0; j < inner_size, j++)
+					for (int j = 0; j < inner_size; j++)
 					{
 						fout << " " << vec[i][j];
 					}					
@@ -188,7 +188,7 @@ namespace StlTextIO
 				if (inner_size != 0)
 				{
 					vec[i].resize(inner_size);
-					for (int j = 0; j < inner_size, j++)
+					for (int j = 0; j < inner_size; j++)
 					{
 						int data;
 						fin >> data;

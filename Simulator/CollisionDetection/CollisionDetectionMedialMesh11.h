@@ -2,7 +2,7 @@
 #ifndef COLLISION_DETECTION_ON_MEDIAL_MESH_H
 #define COLLISION_DETECTION_ON_MEDIAL_MESH_H
 #include "MatrixCore.h"
-#include "Commom\PolynomialSolver.h"
+#include "Commom/PolynomialSolver.h"
 #include <queue>
 
 namespace CDMM

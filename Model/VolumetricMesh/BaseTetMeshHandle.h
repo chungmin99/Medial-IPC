@@ -3,8 +3,8 @@
 #define BASE_TET_MESH_HANDLE_H
 #include "BaseTetMesh.h"
 #include "IsotropicMaterial/VolumetricMeshENuMaterial.h"
-#include "Commom\DataStructure\DataSet.h"
-#include "Commom\GeometryComputation.h"
+#include "Commom/DataStructure/DataSet.h"
+#include "Commom/GeometryComputation.h"
 #include <QOpenGLFunctions>
 
 typedef DataSet<int> BaseTetElementSet;

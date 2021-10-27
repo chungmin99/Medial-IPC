@@ -5,7 +5,7 @@
 	Only Triangle Mesh
 */
 #include "MatrixCore.h"
-#include "Commom\BufferSerialization.h"
+#include "Commom/BufferSerialization.h"
 #include "BaseRenderMaterial.h"
 
 class BaseSurfaceMeshBufferPool

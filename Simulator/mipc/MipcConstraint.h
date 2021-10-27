@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <iostream>
 #include <queue>
-#include "Simulator\FiniteElementMethod\Reduced\ReducedFrame.h" 
-#include "Commom\SPDProjectFunction.h"
-#include "Simulator\CollisionDetection\CollisionDetectionMedialMesh.h"
+#include "Simulator/FiniteElementMethod/Reduced/ReducedFrame.h" 
+#include "Commom/SPDProjectFunction.h"
+#include "Simulator/CollisionDetection/CollisionDetectionMedialMesh.h"
 
 namespace MIPC
 {

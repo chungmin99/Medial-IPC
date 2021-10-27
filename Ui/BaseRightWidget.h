@@ -5,7 +5,7 @@
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets>
 #include <QResizeEvent>
-#include "Scene\BaseScene.h"
+#include "Scene/BaseScene.h"
 #include "ui_RightFormWidget.h"
 #include "ColorSelectionPanel.h"
 #include "BaseMaterialEditWidget.h"

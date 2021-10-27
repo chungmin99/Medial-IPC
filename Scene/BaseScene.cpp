@@ -1,5 +1,7 @@
 #include "BaseScene.h"
-#include<direct.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 BaseScene::BaseScene():_sim(nullptr)
 {
@@ -9,7 +11,8 @@ BaseScene::BaseScene():_sim(nullptr)
 
 	QSurfaceFormat glSurfaceFormat;
 	glSurfaceFormat.setSamples(32);
-	setFormat(glSurfaceFormat);
+	// setFormat(glSurfaceFormat);
+	setFormat(QGLFormat::fromSurfaceFormat(glSurfaceFormat));
 
 	_selectedTetPointId = -1;
 	_mouseForce.setZero();
@@ -375,7 +378,7 @@ void BaseScene::initAnimation()
 	setAnimationPeriod(0);
 	QDateTime current_date_time = QDateTime::currentDateTime();
 	QString snapshotFileName = QString(_status.animationFilePath.c_str()) + QString("//") + current_date_time.toString("yyyy-MM-dd-hh-mm");
-	int code = mkdir(snapshotFileName.toStdString().c_str());
+	int code = mkdir(snapshotFileName.toStdString().c_str(), 0777);
 	snapshotFileName += QString("/frame");
 	setSnapshotFileName(snapshotFileName);
 	setSnapshotFormat(QString("PNG"));

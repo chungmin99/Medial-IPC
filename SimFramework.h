@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include "ui_SimFramework.h"
 #include <QToolButton>
-#include "Ui\BaseMainWidget.h"
+#include "Ui/BaseMainWidget.h"
+#include "ui_SimFramework.h"
 class SimFramework : public QMainWindow
 {
 	Q_OBJECT

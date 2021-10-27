@@ -6,7 +6,7 @@
 #include <QtWidgets>
 #include "ui_MaterialEditWidget.h"
 #include "ColorSelectionPanel.h"
-#include "Model\TriangleMesh\BaseRenderMaterial.h"
+#include "Model/TriangleMesh/BaseRenderMaterial.h"
 
 class BaseMaterialEditWidget : public QWidget, public Ui::MaterialEditWidget
 {

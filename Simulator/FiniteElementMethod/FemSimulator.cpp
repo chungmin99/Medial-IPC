@@ -1,6 +1,7 @@
 #include "FemSimulator.h"
-#include "Commom\SPDProjectFunction.h"
+#include "Commom/SPDProjectFunction.h"
 #include <QElapsedTimer>
+#include <omp.h>
 
 namespace FiniteElementMethod
 {
@@ -869,6 +870,7 @@ namespace FiniteElementMethod
 	qeal FemSimulator::getEnergy(VectorX & xn, VectorX & x_tilde)
 	{
 		qeal E = 0;
+        /* 
 		qeal dt = _timeStep;
 		// compute static force energy
 		qeal e0 = dt * dt * _sysExternalForce.dot(xn);
@@ -883,6 +885,7 @@ namespace FiniteElementMethod
 
 		std::cout << e0 << " " << e1 << std::endl;
 		system("pause");
+        */
 		return E;
 	}
 

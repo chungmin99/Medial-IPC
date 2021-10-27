@@ -1,4 +1,4 @@
-#include "ColorSelectionPanel.h"
+#include "Ui/ColorSelectionPanel.h"
 
 ColorSelectionPanel::ColorSelectionPanel():
 	_boundColor(nullptr)
@@ -71,6 +71,8 @@ ColorSelectionPanel::ColorSelectionPanel():
 	connect(blueSlider, SIGNAL(valueChanged(int)), this, SLOT(updateFromBlueSlider(int)));
 	connect(alphaSlider, SIGNAL(valueChanged(int)), this, SLOT(updateFromAlphaSlider(int)));
 }
+
+ColorSelectionPanel::~ColorSelectionPanel() {}
 
 void ColorSelectionPanel::updateFromColorPanelBtn(const QColor &color)
 {

@@ -30,7 +30,7 @@
 #ifndef VOLUMETRIC_MESH_ENU_MATERIAL_H_
 #define VOLUMETRIC_MESH_ENU_MATERIAL_H_
 
-#include "Model\VolumetricMesh\BaseTetMeshMaterial.h"
+#include "Model/VolumetricMesh/BaseTetMeshMaterial.h"
 
  // stores an isotropic material specified by E (Young's modulus), nu (Poisson's ratio), and density
 	 // such a material specification is very common: (corotational) linear FEM, StVK, etc.

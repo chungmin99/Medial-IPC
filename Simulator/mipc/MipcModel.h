@@ -1,8 +1,8 @@
 #pragma once
 #ifndef Mipc_MODEL_H
 #define Mipc_MODEL_H
-#include "Simulator\FiniteElementMethod\FemModel.h"
-#include "Simulator\FiniteElementMethod\Reduced\ReducedFrame.h"
+#include "Simulator/FiniteElementMethod/FemModel.h"
+#include "Simulator/FiniteElementMethod/Reduced/ReducedFrame.h"
 
 
 namespace MIPC

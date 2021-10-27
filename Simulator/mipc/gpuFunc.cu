@@ -1,6 +1,6 @@
-#include "GpuFunc.cuh"
-#include "Simulator\Cuda\CudaMatrixOperator.cu"
-#include "Simulator\Cuda\CudaSVD.cu"
+#include "Simulator/mipc/gpuFunc.cuh"
+#include "Simulator/Cuda/CudaMatrixOperator.cu"
+#include "Simulator/Cuda/CudaSVD.cu"
 
 namespace MIPC
 {	

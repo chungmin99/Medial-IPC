@@ -1,6 +1,6 @@
 #ifndef MIPC_CUDA_FUNC_CUH
 #define MIPC_CUDA_FUNC_CUH
-#include "Simulator\Cuda\CudaHeader.cuh"
+#include "Simulator/Cuda/CudaHeader.cuh"
 
 namespace MIPC
 {	

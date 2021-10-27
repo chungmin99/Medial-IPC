@@ -1,7 +1,7 @@
 #include "BaseSurfaceMesh.h"
-#include "Commom\FileIO.h"
-#include "Commom\DataConversion.h"
-#include "Model\tiny_obj_loader.h"
+#include "Commom/FileIO.h"
+#include "Commom/DataConversion.h"
+#include "Model/tiny_obj_loader.h"
 #include <stdlib.h>
 
 void BaseSurfaceMesh::setNameAndDir(const std::string filename)

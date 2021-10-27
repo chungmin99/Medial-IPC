@@ -1,9 +1,9 @@
 #ifndef Mipc_SIMULATOR_H
 #define Mipc_SIMULATOR_H
 
-#include "Simulator\FiniteElementMethod\FemSimulator.h"
-#include "MpsCCD.cuh"
-#include "GpuFunc.cuh"
+#include "Simulator/FiniteElementMethod/FemSimulator.h"
+#include "MPsCCD.cuh"
+#include "gpuFunc.cuh"
 #include "MipcModel.h"
 #include "MipcConstraint.h"
 

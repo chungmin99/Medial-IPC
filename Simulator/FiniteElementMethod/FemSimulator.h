@@ -2,14 +2,14 @@
 #ifndef FINITE_ELEMENT_METHOD_SIMULATOR_H
 #define FINITE_ELEMENT_METHOD_SIMULATOR_H
 
-#include "Simulator\BaseSimulator.h"
-#include "Commom\FileIO.h"
+#include "Simulator/BaseSimulator.h"
+#include "Commom/FileIO.h"
 #include "MatrixCore.h"
 #include "FemModel.h"
-#include "Commom\SparseMatrixTopology.h"
+#include "Commom/SparseMatrixTopology.h"
 #include "ImplicitNewMarkSolverConfig.h"
-#include "Commom\PolynomialSolver.h"
-#include "Commom\AutoFlipSVD.h"
+#include "Commom/PolynomialSolver.h"
+#include "Commom/AutoFlipSVD.h"
 
 namespace FiniteElementMethod
 {

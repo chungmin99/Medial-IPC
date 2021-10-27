@@ -7,6 +7,7 @@
 #include "Commom/BaseFrame.h"
 #include "MatrixCore.h"
 #include "Commom/GeometryComputation.h"
+#include <cfloat>
 
 class Box : public BaseSurfaceMesh
 {

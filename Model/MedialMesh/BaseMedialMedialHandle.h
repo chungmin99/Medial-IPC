@@ -2,7 +2,7 @@
 #ifndef BASE_MEDIAL_MESH_Handle_H
 #define BASE_MEDIAL_MESH_Handle_H
 #include "BaseMedialMesh.h"
-#include "Commom\DataStructure\DataSet.h"
+#include "Commom/DataStructure/DataSet.h"
 #include <QOpenGLFunctions>
 
 typedef DataSet<int> BaseMedialPointSet;

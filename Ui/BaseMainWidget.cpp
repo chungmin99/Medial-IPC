@@ -1,5 +1,5 @@
-     #include "BaseMainWidget.h"
-#include "Simulator\SimulatorFactor.h"
+#include "Ui/BaseMainWidget.h"
+#include "Simulator/SimulatorFactor.h"
 
 
 void BaseMainWidget::bindWidget()

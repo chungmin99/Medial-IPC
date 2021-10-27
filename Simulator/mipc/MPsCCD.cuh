@@ -1,7 +1,7 @@
 #ifndef Medial_Primitives_CCD_CUH
 #define Medial_Primitives_CCD_CUH
-#include "Simulator\Cuda\CudaHeader.cuh"
-#include "Simulator\Cuda\CudaMatrixOperator.cuh"
+#include "Simulator/Cuda/CudaHeader.cuh"
+#include "Simulator/Cuda/CudaMatrixOperator.cuh"
 
 namespace MIPC
 {

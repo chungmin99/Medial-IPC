@@ -11,8 +11,8 @@
 #include <QOpenGLBuffer>
 #include "MatrixCore.h"
 #include "BaseRenderMaterial.h"
-#include "Commom\BaseFrame.h"
-#include "Commom\BufferSerialization.h"
+#include "Commom/BaseFrame.h"
+#include "Commom/BufferSerialization.h"
 #include "BaseSurfaceMeshBufferPool.h"
 
 class BaseSurfaceMeshBuffer

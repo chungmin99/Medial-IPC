@@ -1,6 +1,6 @@
 #include "BaseMedialMesh.h"
-#include "Commom\FileIO.h"
-#include "Commom\GeometryComputation.h"
+#include "Commom/FileIO.h"
+#include "Commom/GeometryComputation.h"
 
 void BaseMedialMeshBuffer::copyMedialPointsToBuffer(qeal* buffer, int size)
 {

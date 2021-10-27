@@ -2,7 +2,7 @@
 #ifndef BASE_MEDIAL_MESH_BUFFER_POOL_H
 #define BASE_MEDIAL_MESH_BUFFER_POOL_H
 #include "MatrixCore.h"
-#include "Commom\BufferSerialization.h"
+#include "Commom/BufferSerialization.h"
 
 class BaseMedialMeshBufferPool
 {

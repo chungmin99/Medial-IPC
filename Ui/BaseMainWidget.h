@@ -7,11 +7,11 @@
 #include "BaseBottomWidget.h"
 #include "BaseRightWidget.h"
 #include "MainLayout.h"
-#include "Scene\BaseScene.h"
+#include "Scene/BaseScene.h"
 #include "BaseToolBar.h"
-#include "Commom\tinyxml\tinyxml.h"
+#include "Commom/tinyxml/tinyxml.h"
 
-#include "Simulator\BaseSimulator.h"
+#include "Simulator/BaseSimulator.h"
 
 class BaseMainWidget : public QWidget
 {

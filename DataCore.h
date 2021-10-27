@@ -4,6 +4,8 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <limits>
+#include <cfloat>
 
 #define USE_DOUBLE_PRECISION
 

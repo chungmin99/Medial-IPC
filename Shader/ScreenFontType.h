@@ -7,7 +7,6 @@
 #include <QOpenGLTexture>
 #include <QGLViewer/camera.h>
 #include <ft2build.h>
-#include <ft2build.h>
 #include <freetype/freetype.h>
 #include <freetype/ftglyph.h>
 #include <freetype/ftoutln.h>

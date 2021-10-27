@@ -1,6 +1,6 @@
 #pragma once
-#include "FiniteElementMethod\FemSimulator.h"
-#include "mipc\MipcSimulator.h"
+#include "FiniteElementMethod/FemSimulator.h"
+#include "mipc/MipcSimulator.h"
 
 static BaseSimulator* createSimulator(std::string& simName, RunPlatform platform)
 {

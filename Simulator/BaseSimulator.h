@@ -2,12 +2,12 @@
 #ifndef BASE_SIMULATOR_H
 #define BASE_SIMULATOR_H
 
-#include "Commom\tinyxml\tinyxml.h"
-#include "Model\BaseModel.h"
-#include "Commom\EigenMatrixIO.h"
+#include "Commom/tinyxml/tinyxml.h"
+#include "Model/BaseModel.h"
+#include "Commom/EigenMatrixIO.h"
 #include <unordered_set>
-#include "Simulator\Cuda\CudaHeader.cuh"
-#include "Simulator\Cuda\CudaHandle.h"
+#include "Simulator/Cuda/CudaHeader.cuh"
+#include "Simulator/Cuda/CudaHandle.h"
 
 enum RunPlatform
 {

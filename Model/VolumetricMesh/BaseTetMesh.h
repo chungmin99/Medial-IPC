@@ -4,10 +4,10 @@
 
 #include <memory>
 #include <vector>
-#include "Commom\BufferSerialization.h"
+#include "Commom/BufferSerialization.h"
 #include "BaseTetMeshBufferPool.h"
 #include <QGLViewer/vec.h>
-#include <QGLViewer/Quaternion.h>
+#include <QGLViewer/quaternion.h>
 #include "MatrixCore.h"
 
 class BaseTetMeshBuffer

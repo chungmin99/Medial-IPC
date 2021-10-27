@@ -7,9 +7,9 @@
 #include "ui_ColorSelectionWidget.h"
 #include <QCloseEvent>
 
-#include "colorpanelbtn.h"
-#include "colorbutton.h"
-#include "colorpanelhsb.h"
+#include "Ui/colorpanelbtn.h"
+#include "Ui/colorbutton.h"
+#include "Ui/colorpanelhsb.h"
 #include <QSlider>
 #include <QColor>
 
@@ -18,7 +18,7 @@ class ColorSelectionPanel : public QWidget, public Ui::ColorSelectionWidget
 	Q_OBJECT
 public:
 	ColorSelectionPanel();
-	~ColorSelectionPanel(){}
+	virtual ~ColorSelectionPanel();
 
 	void refreshWidget();
 signals:

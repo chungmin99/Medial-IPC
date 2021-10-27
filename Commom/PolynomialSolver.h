@@ -69,7 +69,7 @@ namespace PolynoimalSolver
 			while (!set.empty()) set.pop();
 		}
 
-		bool insert(Vector2& s0)
+		bool insert(const Vector2& s0)
 		{
 			if (_nullSet)
 				return false;
@@ -102,7 +102,7 @@ namespace PolynoimalSolver
 			return true;
 		}
 
-		bool insert(std::vector<Vector2>& outter)
+		bool insert(const std::vector<Vector2>& outter)
 		{
 			if (_nullSet)
 				return false;

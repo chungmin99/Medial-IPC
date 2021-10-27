@@ -5,7 +5,7 @@
 	Only Tetgen File
 */
 #include "MatrixCore.h"
-#include "Commom\BufferSerialization.h"
+#include "Commom/BufferSerialization.h"
 
 class BaseTetMeshBufferPool
 {
