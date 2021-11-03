@@ -462,6 +462,7 @@ target_include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles/$<CONFIG>;"
     "${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles;"
     "${CMAKE_CURRENT_SOURCE_DIR}/."
+    "${Qt_INCLUDE_DIRS}"
 )
 
 # ################################################################################
