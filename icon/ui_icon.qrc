@@ -1,7 +1,7 @@
 <RCC>
   <qresource>
-    <file>OpenFile.png</file>
-    <file>SaveFile.png</file>
+    <file>open_file.png</file>
+    <file>save_file.png</file>
     <file>reset_animation.png</file>
     <file>pause_animation.png</file>
     <file>play_animation.png</file>
@@ -9,6 +9,6 @@
     <file>init_simulator.png</file>
     <file>select_surface_point.png</file>
     <file>select_tet_point.png</file>
-     <file>render_line_mode.png</file>
+    <file>render_line_mode.png</file>
   </qresource>
 </RCC>

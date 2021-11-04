@@ -10,12 +10,12 @@ ColorSelectionPanel::ColorSelectionPanel():
 	gridLayout->setObjectName(QStringLiteral("gridLayout"));
 	setWindowTitle(QString("ColorSelection"));
 
-	colorPanelBtn = new ColorPanelBtn(this);
-	colorPanelHSB = new ColorPanelHSB(this);
-	colorButton = new ColorButton(this);
-	colorButton->setFixedWidth(180);
-	colorButton->setCanMove(false);
-	colorButton->setEnabled(false);
+	// colorPanelBtn = new ColorPanelBtn(this);
+	// colorPanelHSB = new ColorPanelHSB(this);
+	// colorButton = new ColorButton(this);
+	// colorButton->setFixedWidth(180);
+	// colorButton->setCanMove(false);
+	// colorButton->setEnabled(false);
 	redSlider = new QSlider(Qt::Horizontal, this);
 	greenSlider = new QSlider(Qt::Horizontal, this);
 	blueSlider = new QSlider(Qt::Horizontal, this);
@@ -32,10 +32,10 @@ ColorSelectionPanel::ColorSelectionPanel():
 	int rows = 4;
 	int cols = 10;
 
-	gridLayout->addWidget(colorPanelHSB, 0, 0, 1, 9);
-	gridLayout->addWidget(colorPanelBtn, 0, 9, 5, 1);
+	// gridLayout->addWidget(colorPanelHSB, 0, 0, 1, 9);
+	// gridLayout->addWidget(colorPanelBtn, 0, 9, 5, 1);
 
-	gridLayout->addWidget(colorButton, 1, 0, 4, 5);
+	// gridLayout->addWidget(colorButton, 1, 0, 4, 5);
 
 	gridLayout->addWidget(r_color_lineEdit, 1, 5, 1, 2);
 	gridLayout->addWidget(redSlider, 1, 7, 1, 1);
@@ -58,8 +58,8 @@ ColorSelectionPanel::ColorSelectionPanel():
 	gridLayout->setContentsMargins(10, 10, 10, 10);
 	setLayout(gridLayout);
 
-	connect(colorPanelBtn, SIGNAL(colorChanged(const QColor &)), this, SLOT(updateFromColorPanelBtn(const QColor &)));
-	connect(colorPanelHSB, SIGNAL(colorChanged(const QColor &, double, double)), this, SLOT(updateFromColorPanelHSB(const QColor&, double, double)));
+	// connect(colorPanelBtn, SIGNAL(colorChanged(const QColor &)), this, SLOT(updateFromColorPanelBtn(const QColor &)));
+	// connect(colorPanelHSB, SIGNAL(colorChanged(const QColor &, double, double)), this, SLOT(updateFromColorPanelHSB(const QColor&, double, double)));
 
 	connect(r_color_lineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(updateFromRedEditLine()));
 	connect(g_color_lineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(updateFromGreenEditLine()));
@@ -142,7 +142,7 @@ void ColorSelectionPanel::closeEvent(QCloseEvent * event)
 
 void ColorSelectionPanel::refreshWidget()
 {
-	colorButton->setNormalColor(_color);
+	// colorButton->setNormalColor(_color);
 	r_color_lineEdit->setText(QString::number(_color.red()));
 	g_color_lineEdit->setText(QString::number(_color.green()));
 	b_color_lineEdit->setText(QString::number(_color.blue()));

@@ -7,9 +7,9 @@
 #include "ui_ColorSelectionWidget.h"
 #include <QCloseEvent>
 
-#include "Ui/colorpanelbtn.h"
-#include "Ui/colorbutton.h"
-#include "Ui/colorpanelhsb.h"
+// #include "Ui/colorpanelbtn.h"
+// #include "Ui/colorbutton.h"
+// #include "Ui/colorpanelhsb.h"
 #include <QSlider>
 #include <QColor>
 
@@ -42,9 +42,9 @@ protected:
 public:
 	QGridLayout *gridLayout;
 
-	ColorPanelBtn* colorPanelBtn;
-	ColorPanelHSB* colorPanelHSB;
-	ColorButton* colorButton;
+	// ColorPanelBtn* colorPanelBtn;
+	// ColorPanelHSB* colorPanelHSB;
+	// ColorButton* colorButton;
 	QSlider* redSlider;
 	QSlider* greenSlider;
 	QSlider* blueSlider;

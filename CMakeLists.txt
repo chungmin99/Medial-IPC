@@ -365,9 +365,9 @@ set(UI_SRCS
     "Ui/MainLayout.cpp"
     )
 set(UI_MOC_HDRS 
-    "Ui/colorpanelbtn.h"
-    "Ui/colorbutton.h"
-    "Ui/colorpanelhsb.h"
+    # "Ui/colorpanelbtn.h"
+    # "Ui/colorbutton.h"
+    # "Ui/colorpanelhsb.h"
     "Ui/BaseMainWidget.h"
     "Ui/BaseRightWidget.h"
     "Ui/BaseToolBar.h"
@@ -377,6 +377,14 @@ set(UI_MOC_HDRS
 add_definitions(-DQT_THREAD_SUPPORT)
 qt5_wrap_cpp(UI_SRCS ${UI_MOC_HDRS})
 # add_executable(${PROJECT_NAME} ${UI_SRCS} ${UI_CPP_FILES})
+
+set(Source_Files__Resources
+    "Resources/timesbd.ttf"
+    "Resources/timesbi.ttf"
+    "Resources/timesi.ttf"
+    "Resources/times.ttf"
+)
+source_group("Source Files\\Resources" FILES ${Source_Files__Resources})
 
 set(ALL_FILES
     ${no_group_source_files}
@@ -405,6 +413,7 @@ set(ALL_FILES
     ${UI_SRCS}
     ${UI_MOC_HDRS}
     ${Source_Files__Ui__Form}
+    ${Source_Files__Resources}
 )
 
 
@@ -413,7 +422,7 @@ set(ALL_FILES
 ################################################################################
 # qt5_wrap_cpp(cbtn ${CMAKE_SOURCE_DIR}/Ui/colorbutton.h TARGET ${PROJECT_NAME})
 # add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc" ${cbtn})
-add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc")
+add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc" "icon/ui_icon.qrc")
 
 # use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 # ################################################################################

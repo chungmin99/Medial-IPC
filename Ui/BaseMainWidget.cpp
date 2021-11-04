@@ -42,14 +42,20 @@ void BaseMainWidget::bindRightAndBottomWidget()
 
 void BaseMainWidget::handleOpenFileAction()
 {
-	QString filename = QFileDialog::getOpenFileName(this, tr("Select a Surface to import"), "./example/", tr(""));
-	if (filename.isEmpty())
-		return;
-	std::string dir, name, format;
-	getFilenameInfo(filename.toStdString(), dir, name, format);
+	// QString filename = QFileDialog::getOpenFileName(this, tr("Select a Surface to import"), "./example/", tr(""));
+	// if (filename.isEmpty())
+	// 	return;
+	// std::string dir, name, format;
+	// getFilenameInfo(filename.toStdString(), dir, name, format);
+    std::string dir, name, format, filename;
+    dir = "/home/chungmin99/Documents/Medial-IPC/example/test";
+    name = "test";
+    format = "xml";
+    filename = "/home/chungmin99/Documents/Medial-IPC/example/test/test.xml";
 	if (format == std::string("xml"))
 	{
-		bool flag = importFromConfigFile(filename.toStdString());
+		// bool flag = importFromConfigFile(filename.toStdString());
+		bool flag = importFromConfigFile(filename);
 		emit addFileSuccess(flag);
 	}
 	else

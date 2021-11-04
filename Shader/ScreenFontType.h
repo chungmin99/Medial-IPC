@@ -41,7 +41,7 @@ namespace ScreenTextPainter
 	public:
 		TextPainter();
 		~TextPainter();
-		void generateFont(QOpenGLFunctions* f, string filename = "Resources/times.ttf", float height = 36);
+		void generateFont(QOpenGLFunctions* f, string filename = "../Resources/times.ttf", float height = 36);
 		void renderText(QOpenGLShaderProgram* program, string text, GLfloat x, GLfloat y, GLfloat scale, QVector3D color);
 
 		map <GLchar , Character > charList;

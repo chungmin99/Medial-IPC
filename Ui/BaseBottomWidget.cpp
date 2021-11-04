@@ -45,11 +45,11 @@ void BaseBottomWidget::bindMultiViewerGroup()
 
 void BaseBottomWidget::bindAnimationGroup()
 {
-	playAnimationIcon = new QIcon("./icon/play_animation.png");
-	pauseAnimationIcon = new QIcon("./icon/pause_animation.png");
-	recordAnimationIcon = new QIcon("./icon/record_animation.png");
-	resetAnimationIcon = new QIcon("./icon/reset_animation.png");
-	initSimulatorIcon = new QIcon("./icon/init_simulator.png");
+	playAnimationIcon = new QIcon("../icon/play_animation.png");
+	pauseAnimationIcon = new QIcon("../icon/pause_animation.png");
+	recordAnimationIcon = new QIcon("../icon/record_animation.png");
+	resetAnimationIcon = new QIcon("../icon/reset_animation.png");
+	initSimulatorIcon = new QIcon("../icon/init_simulator.png");
 	
 	play_animation_Button->setIcon(*playAnimationIcon);
 	play_animation_Button->setIconSize(play_animation_Button->size());

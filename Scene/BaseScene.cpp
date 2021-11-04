@@ -345,9 +345,9 @@ void BaseScene::initCamera()
 
 void BaseScene::initShaderProgram()
 {
-	_phongProgram.initProgram("Shader/Program/phong_shader_program.vs", "Shader/Program/phong_shader_program.fs");
-	_shadowProgram.initProgram("Shader/Program/depth_map.vs", "Shader/Program/depth_map.fs");
-	_textProgram.initProgram("Shader/Program/text_shader_program.vs", "Shader/Program/text_shader_program.fs");
+	_phongProgram.initProgram("../Shader/Program/phong_shader_program.vs", "../Shader/Program/phong_shader_program.fs");
+	_shadowProgram.initProgram("../Shader/Program/depth_map.vs", "../Shader/Program/depth_map.fs");
+	_textProgram.initProgram("../Shader/Program/text_shader_program.vs", "../Shader/Program/text_shader_program.fs");
 	_textPainter.generateFont(QOpenGLContext::currentContext()->functions());
 }
 

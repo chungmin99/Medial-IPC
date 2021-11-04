@@ -156,7 +156,7 @@ Floor::Floor(int xz, QColor uniformColor)
 	renderMaterials.resize(1);
 	renderMaterials[0] = new BaseRenderMaterial();
 	renderMaterials[0]->ambient = uniformColor;
-	renderMaterials[0]->readTextureMap(QString("./texture/floor_texture.jpg"), AmbientMapIndex);
+	renderMaterials[0]->readTextureMap(QString("../texture/floor_texture.jpg"), AmbientMapIndex);
 	initVBO();
 }
 
