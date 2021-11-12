@@ -6,19 +6,21 @@ project(SimFramework CXX CUDA)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 
+# find_package(MKL REQUIRED)
 set(BLA_VENDOR Intel10_64lp)
 find_package(BLAS REQUIRED)
+find_path(BLAS_INCLUDE_DIRS mkl.h
+    /usr/include/mkl
+    /usr/local/include
+    $ENV{BLAS_HOME}/include)
 
 # need uiplugin and designer
 find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui OpenGL OpenGLExtensions Xml Designer UiPlugin)
 
-# set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/Ui/Form)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/Ui/Form ${CMAKE_CURRENT_SOURCE_DIR})
-# QT5_WRAP_UI( UI_HDRS ${UI_FILES} )
-
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
@@ -28,7 +30,9 @@ find_package(CUDA REQUIRED)
 find_package(Freetype REQUIRED)
 find_package(OpenMP REQUIRED)
 
-set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++14" )
+# set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++14 -l/usr/include/mkl" )
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -l/usr/include/mkl")
+set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++14 ${BLAS_LINKER_FLAGS}")
 
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
@@ -50,35 +54,6 @@ set(CMAKE_CONFIGURATION_TYPES
     "Release"
     CACHE STRING "" FORCE
 )
-
-################################################################################
-# Global compiler options
-################################################################################
-if(MSVC)
-    # remove default flags provided with CMake for MSVC
-    set(CMAKE_CXX_FLAGS "")
-    set(CMAKE_CXX_FLAGS_DEBUG "")
-    set(CMAKE_CXX_FLAGS_RELEASE "")
-endif()
-
-################################################################################
-# Global linker options
-################################################################################
-if(MSVC)
-    # remove default flags provided with CMake for MSVC
-    set(CMAKE_EXE_LINKER_FLAGS "")
-    set(CMAKE_MODULE_LINKER_FLAGS "")
-    set(CMAKE_SHARED_LINKER_FLAGS "")
-    set(CMAKE_STATIC_LINKER_FLAGS "")
-    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS}")
-    set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS}")
-    set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_SHARED_LINKER_FLAGS}")
-    set(CMAKE_STATIC_LINKER_FLAGS_DEBUG "${CMAKE_STATIC_LINKER_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS}")
-    set(CMAKE_MODULE_LINKER_FLAGS_RELEASE "${CMAKE_MODULE_LINKER_FLAGS}")
-    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS}")
-    set(CMAKE_STATIC_LINKER_FLAGS_RELEASE "${CMAKE_STATIC_LINKER_FLAGS}")
-endif()
 
 ################################################################################
 # Nuget packages function stub.
@@ -459,7 +434,7 @@ add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc" "icon/ui_icon.qrc
 target_include_directories(
     ${PROJECT_NAME} PUBLIC
     "${FREETYPE_INCLUDE_DIRS};"
-    # "${MKL_INCLUDE_DIRS};"
+    "${MKL_INCLUDE_DIRS};"
     "${QGLViewer_INCLUDE_DIRS};"
     "${CUDA_INCLUDE_DIRS};"
     "${OPENGL_INCLUDE_DIRS};"
@@ -472,21 +447,25 @@ target_include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles;"
     "${CMAKE_CURRENT_SOURCE_DIR}/."
     "${Qt_INCLUDE_DIRS}"
+    "${BLAS_INCLUDE_DIRS}"
 )
+message("${BLAS_INCLUDE_DIRS}")
 
 # ################################################################################
 # # Dependencies
 # ################################################################################
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
-    "$<$<CONFIG:Debug>:"
-        "QGLViewerd2;"
-        "qucd"
-    ">"
-    "$<$<CONFIG:Release>:"
-        "QGLViewer2;"
-        "OpenCL;"
-        "quc"
-    ">"
+    # "$<$<CONFIG:Debug>:"
+    #     "QGLViewerd;"
+    #     # "qucd"
+    # ">"
+    # "$<$<CONFIG:Release>:"
+    #     "QGLViewer;"
+    #     "OpenCL;"
+    #     # "quc"
+    # ">"
+    "${MKL_INCLUDE_DIR};"
+    "${BLAS_LIBRARIES};"
     "${OPENGL_LIBRARIES};"
     "${GLUT_LIBRARY};"
     "${CUDA_LIBRARIES};"
@@ -498,15 +477,15 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "${OpenMP_CXX_LIBRARIES};"
     # "glu32;"
     "freetype;"
-    # "cuda;"
-    # "cudadevrt;"
-    # "cudart;"
-    # "cudart_static;"
-    # "cusolver;"
-    # "cusparse;"
-    # "cublas;"
+    "cuda;"
+    "cudadevrt;"
+    "cudart;"
+    "cudart_static;"
+    "cusolver;"
+    "cusparse;"
+    "cublas;"
     "tinyxml;"
-    # "mkl_intel_ilp64;"
+    "mkl_intel_ilp64;"
     "mkl_sequential;"
     "mkl_core;"
     "mkl_intel_lp64;"
@@ -522,15 +501,13 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "Qt5::UiPlugin;"
     "Eigen3::Eigen;"
     "${FREETYPE_LIBRARIES};"
-    "${MKL_LIBRARIES};"
     "${QGLViewer_LIBRARY};"
     "${CUDA_LIBRARIES};"
+    "${MKL_LIBRARIES};"
 )
 target_link_libraries(
     ${PROJECT_NAME} PRIVATE 
     "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
-
-# add_executable(${PROJECT_NAME} ${ALL_FILES})
 
 if ( TARGET Qt5::Core )
     get_property( core_options TARGET Qt5::Core PROPERTY INTERFACE_COMPILE_OPTIONS )
@@ -539,12 +516,3 @@ if ( TARGET Qt5::Core )
     set_property( TARGET Qt5::Core PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE "ON" )
     set( CMAKE_CXX_COMPILE_OPTIONS_PIE "-fPIC" )
 endif()
-
-# file(GLOB HEADERS_TO_MOC ${CMAKE_CURRENT_SOURCE_DIR}/Ui/*.h)
-# # Don't display a note for the headers which don't produce a moc_*.cpp 
-# qt5_wrap_cpp(PROCESSED_MOCS ${HEADERS_TO_MOC} TARGET ${PROJECT_NAME} OPTIONS --no-notes) 
-# target_sources(${PROJECT_NAME} PRIVATE ${PROCESSED_MOCS}) # This adds generated moc cpps to target
-# target_sources(${PROJECT_NAME} PRIVATE
-#     ${CMAKE_SOURCE_DIR}/Ui/colorbutton.h
-#     ${CMAKE_SOURCE_DIR}/Ui/colorpanelhsb.h
-#     )

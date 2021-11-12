@@ -39,8 +39,8 @@ IF (WIN32)
   ENDIF()
   SET(DEFAULT_INTEL_MKL_DIR "${INTEL_COMPILER_DIR}/mkl")
 ELSE (WIN32)
-  SET(DEFAULT_INTEL_COMPILER_DIR "/opt/intel")
-  SET(DEFAULT_INTEL_MKL_DIR "/opt/intel/mkl")
+  SET(DEFAULT_INTEL_COMPILER_DIR "/usr/lib/x86_64-linux-gnu/")
+  SET(DEFAULT_INTEL_MKL_DIR "/usr/lib/x86_64-linux-gnu/mkl")
 ENDIF (WIN32)
 
 # Intel Compiler Suite
@@ -408,3 +408,79 @@ ENDIF(NOT MKL_FIND_QUIETLY)
 
 # Do nothing if MKL_FOUND was set before!
 ENDIF (NOT MKL_FOUND)
+
+# if (MKL_INCLUDE_DIRS AND MKL_LIBRARIES AND MKL_INTERFACE_LIBRARY AND
+#     MKL_SEQUENTIAL_LAYER_LIBRARY AND MKL_CORE_LIBRARY)
+# 
+# if(NOT BUILD_SHARED_LIBS)
+#   set(INT_LIB "libmkl_intel_lp64.a")
+#   set(SEQ_LIB "libmkl_sequential.a")
+#   set(THR_LIB "libmkl_intel_thread.a")
+#   set(COR_LIB "libmkl_core.a")
+# else()
+#     set(INT_LIB "mkl_intel_lp64")
+#     set(SEQ_LIB "mkl_sequential")
+#     set(THR_LIB "mkl_intel_thread")
+#     set(COR_LIB "mkl_core")
+# endif()
+# 
+# find_path(MKL_INCLUDE_DIR NAMES mkl.h HINTS {MKLROOT}/include {CONDA_PREFIX}/include)
+# 
+# find_library(MKL_INTERFACE_LIBRARY
+#              NAMES 
+#              PATHS {MKLROOT}/lib
+#                    {MKLROOT}/lib/intel64
+#                    {INTEL}/mkl/lib/intel64
+#                    {CONDA_PREFIX}/lib
+#              NO_DEFAULT_PATH)
+# 
+# find_library(MKL_SEQUENTIAL_LAYER_LIBRARY
+#              NAMES 
+#              PATHS {MKLROOT}/lib
+#                    {MKLROOT}/lib/intel64
+#                    {INTEL}/mkl/lib/intel64
+#                    {CONDA_PREFIX}/lib
+#              NO_DEFAULT_PATH)
+# 
+# find_library(MKL_CORE_LIBRARY
+#              NAMES 
+#              PATHS {MKLROOT}/lib
+#                    {MKLROOT}/lib/intel64
+#                    {INTEL}/mkl/lib/intel64
+#                    {CONDA_PREFIX}/lib
+#              NO_DEFAULT_PATH)
+# 
+# set(MKL_INCLUDE_DIRS )
+# set(MKL_LIBRARIES   )
+# 
+# if (MKL_INCLUDE_DIR AND
+#     MKL_INTERFACE_LIBRARY AND
+#     MKL_SEQUENTIAL_LAYER_LIBRARY AND
+#     MKL_CORE_LIBRARY)
+# 
+#     if (NOT DEFINED ENV{CRAY_PRGENVPGI} AND
+#         NOT DEFINED ENV{CRAY_PRGENVGNU} AND
+#         NOT DEFINED ENV{CRAY_PRGENVCRAY} AND
+#         NOT DEFINED ENV{CRAY_PRGENVINTEL})
+#       set(ABI "-m64")
+#     endif()
+# 
+#     set(CMAKE_C_FLAGS " -DMKL_ILP64 ")
+#     set(CMAKE_CXX_FLAGS " -DMKL_ILP64 ")
+# 
+# else()
+# 
+#   set(MKL_INCLUDE_DIRS "")
+#   set(MKL_LIBRARIES "")
+#   set(MKL_INTERFACE_LIBRARY "")
+#   set(MKL_SEQUENTIAL_LAYER_LIBRARY "")
+#   set(MKL_CORE_LIBRARY "")
+# 
+# endif()
+# 
+# # Handle the QUIETLY and REQUIRED arguments and set MKL_FOUND to TRUE if
+# # all listed variables are TRUE.
+# INCLUDE(FindPackageHandleStandardArgs)
+# FIND_PACKAGE_HANDLE_STANDARD_ARGS(MKL DEFAULT_MSG MKL_LIBRARIES MKL_INCLUDE_DIRS MKL_INTERFACE_LIBRARY MKL_SEQUENTIAL_LAYER_LIBRARY MKL_CORE_LIBRARY)
+# 
+# MARK_AS_ADVANCED(MKL_INCLUDE_DIRS MKL_LIBRARIES MKL_INTERFACE_LIBRARY MKL_SEQUENTIAL_LAYER_LIBRARY MKL_CORE_LIBRARY)

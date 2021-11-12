@@ -1,13 +1,13 @@
 #pragma once
 #ifndef MATRIX_CORE_H
 #define MATRIX_CORE_H
-// #ifndef  EIGEN_USE_MKL_ALL
-// #define EIGEN_USE_MKL_ALL
-// #define EIGEN_VECTORIZE_SSE4_2
-// #endif // ! EIGEN_USE_MKL_ALL
+#ifndef  EIGEN_USE_MKL_ALL
+#define EIGEN_USE_MKL_ALL
+#define EIGEN_VECTORIZE_SSE4_2
+#endif // ! EIGEN_USE_MKL_ALL
 
 #include <Eigen/Eigen>
-// #include <Eigen/PardisoSupport>
+#include <Eigen/PardisoSupport>
 #include "DataCore.h"
 
 typedef Eigen::Matrix<qeal, 2, 1> Vector2;
