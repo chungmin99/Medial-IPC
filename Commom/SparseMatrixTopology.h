@@ -2,7 +2,7 @@
 #ifndef SPARSE_MATRIX_TOPOLOGY_H
 #define SPARSE_MATRIX_TOPOLOGY_H
 #include <map>
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 
 class SparseMatrixTopology
 {

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef FINITE_ELEMENT_METHOD_MODEL_H
 #define FINITE_ELEMENT_METHOD_MODEL_H
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 #include "Model/BaseModel.h"
 #include "Model/VolumetricMesh/IsotropicMaterial/IsotropicMaterial.h"
 #include "Model/VolumetricMesh/IsotropicMaterial/NeoHookeanIsotropicMaterial.h"

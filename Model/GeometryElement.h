@@ -3,21 +3,19 @@
 #define Geometry_Element_H
 
 #include "TriangleMesh/BaseSurfaceMesh.h"
-#include "Commom/DataConversion.h"
-#include "Commom/BaseFrame.h"
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 #include "Commom/GeometryComputation.h"
 #include <cfloat>
 
 class Box : public BaseSurfaceMesh
 {
 public:
-	Box(qeal halfX = 0.5, qeal halfY = 0.5, qeal halfZ = 0.5, QVector3D center = QVector3D(0.0, 0.0, 0.0), QColor uniformColor = QColor(75, 75, 217));
+	Box(qeal halfX = 0.5, qeal halfY = 0.5, qeal halfZ = 0.5, Eigen::Vector3d center = Eigen::Vector3d(0.0, 0.0, 0.0));
 	void scale(qeal sx, qeal sy, qeal sz);
-	void setFromBounding(const QVector3D min, const QVector3D max);
-	void setCenter(QVector3D center);
+	void setFromBounding(const Eigen::Vector3d min, const Eigen::Vector3d max);
+	void setCenter(Eigen::Vector3d center);
 protected:
-	QVector3D _center;
+	Eigen::Vector3d _center;
 	qeal _halfZ;
 	qeal _halfY;
 	qeal _halfX;
@@ -26,7 +24,7 @@ protected:
 class Floor : public BaseSurfaceMesh
 {
 public:
-	Floor(int xz = 30.0, QColor uniformColor = QColor(217, 217, 217));
+	Floor(int xz = 30.0);
 	void scaleXZ(int xz);
 	void setYPlane(qeal y);
 
@@ -41,12 +39,10 @@ class SphereElement
 {
 public:
 	SphereElement() {}
-	SphereElement(Vector3 cent, qeal r, localFrame* f = nullptr)
+	SphereElement(Vector3 cent, qeal r)
 	{
 		radius = r;
 		center = cent;
-		if (f != nullptr)
-			frame.setReferenceFrame(f);
 	}
 
 	void operator=(const SphereElement& b);
@@ -54,7 +50,6 @@ public:
 	void show();
 	qeal radius;
 	Vector3 center;
-	OrentationFrame frame;
 };
 
 typedef SphereElement Sphere;

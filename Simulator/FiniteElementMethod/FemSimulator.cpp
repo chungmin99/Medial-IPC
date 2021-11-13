@@ -1,6 +1,5 @@
 #include "FemSimulator.h"
 #include "Commom/SPDProjectFunction.h"
-#include <QElapsedTimer>
 #include <omp.h>
 
 namespace FiniteElementMethod

@@ -7,9 +7,7 @@
 #include "Commom/BufferSerialization.h"
 #include "Model/GeometryElement.h"
 #include "BaseMedialMeshBufferPool.h"
-#include <QGLViewer/vec.h>
-#include <QGLViewer/quaternion.h>
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 
 class BaseMedialMeshBuffer
 {

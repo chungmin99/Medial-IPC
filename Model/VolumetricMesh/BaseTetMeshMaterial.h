@@ -1,7 +1,7 @@
 #pragma once
 #ifndef BASE_TET_MESH_MATERIAL_H
 #define BASE_TET_MESH_MATERIAL_H
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 
 class BaseTetMeshMaterial
 {

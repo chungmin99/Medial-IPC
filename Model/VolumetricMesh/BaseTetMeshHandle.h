@@ -5,7 +5,6 @@
 #include "IsotropicMaterial/VolumetricMeshENuMaterial.h"
 #include "Commom/DataStructure/DataSet.h"
 #include "Commom/GeometryComputation.h"
-#include <QOpenGLFunctions>
 
 typedef DataSet<int> BaseTetElementSet;
 typedef DataSet<int> BaseTetNodeSet;
@@ -49,7 +48,6 @@ public:
 	std::vector<BaseTetElementSet>& getTetMeshElementSet() {return _elementSet;}
 	std::vector<BaseTetNodeSet>& getTetMeshNodeSet() { return _nodeSet; }
 
-	virtual void renderTetMesh(QOpenGLFunctions* f);
 	void setRenderElementSetId(int id) { renderElementSetId = id; }
 //protected:
 public:

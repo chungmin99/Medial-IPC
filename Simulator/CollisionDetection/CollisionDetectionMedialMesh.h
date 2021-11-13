@@ -1,7 +1,7 @@
 #pragma once
 #ifndef COLLISION_DETECTION_ON_MEDIAL_MESH_H
 #define COLLISION_DETECTION_ON_MEDIAL_MESH_H
-#include "DataCore.h"
+#include "Commom/DataCore.h"
 #include "Commom/PolynomialSolver.h"
 #include <queue>
 

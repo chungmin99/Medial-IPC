@@ -11,7 +11,7 @@
 #include <cuda_runtime_api.h>
 #include <cuda.h>
 #include "math.h" // CUDA math library
-#include "DataCore.h"
+#include "Commom/DataCore.h"
 
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef IMPLICIT_NEW_MARK_SOLVER_CONFIG_H
 #define IMPLICIT_NEW_MARK_SOLVER_CONFIG_H 
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 
 namespace FiniteElementMethod
 {

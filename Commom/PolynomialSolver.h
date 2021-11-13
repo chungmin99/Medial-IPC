@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <queue>
-#include<iostream>
+#include <iostream>
 
 namespace PolynoimalSolver
 {

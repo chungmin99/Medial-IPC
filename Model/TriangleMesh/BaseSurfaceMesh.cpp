@@ -1,6 +1,5 @@
 #include "BaseSurfaceMesh.h"
 #include "Commom/FileIO.h"
-#include "Commom/DataConversion.h"
 #include "Model/tiny_obj_loader.h"
 #include <stdlib.h>
 
@@ -66,17 +65,7 @@ bool BaseSurfaceMesh::readMeshFromObjFormat(const std::string filename, BaseSurf
 	std::vector<std::vector<int>> pointFaceList(pointsNum);
 
 	int renderGroupNum = shapes.size();
-	renderMaterials.resize(renderGroupNum);
-	for (int i = 0; i < renderGroupNum; i++)
-	{
-		renderMaterials[i] = new BaseRenderMaterial();
-	}
-
 	std::vector<int> groupFacesNum(renderGroupNum);
-
-	std::vector<int> grounpMaterialIndices(renderGroupNum);
-
-	std::vector<int> faceTexCoord;
 	std::vector<int> faceIndices;
 
 	for (int i = 0; i < renderGroupNum; i++)
@@ -101,44 +90,6 @@ bool BaseSurfaceMesh::readMeshFromObjFormat(const std::string filename, BaseSurf
 			pointFaceList[vid0].push_back(face_id);
 			pointFaceList[vid1].push_back(face_id);
 			pointFaceList[vid2].push_back(face_id);
-
-			int tid0 = idx0.texcoord_index;
-			int tid1 = idx1.texcoord_index;
-			int tid2 = idx2.texcoord_index;
-
-			faceTexCoord.push_back(tid0);
-			faceTexCoord.push_back(tid1);
-			faceTexCoord.push_back(tid2);
-		}
-		if (hasMaterials)
-		{
-			int meterial_id = shapes[i].mesh.material_ids[0];
-			tinyobj::material_t m = groupMaterials[meterial_id];
-			renderMaterials[i]->ambient = getQColorRGB(QVector3D(m.ambient[0], m.ambient[1], m.ambient[2]));
-			renderMaterials[i]->diffuse = getQColorRGB(QVector3D(m.diffuse[0], m.diffuse[1], m.diffuse[2]));
-			renderMaterials[i]->specular = getQColorRGB(QVector3D(m.specular[0], m.specular[1], m.specular[2]));
-			renderMaterials[i]->shinness = m.shininess;
-
-			if (m.ambient_texname.length() > 0)
-			{
-				QString imgFile = QString(base_dir.c_str()) + QString(m.ambient_texname.c_str());
-				renderMaterials[i]->readTextureMap(imgFile, AmbientMapIndex);
-			}
-			if (m.diffuse_texname.length() > 0)
-			{
-				QString imgFile = QString(base_dir.c_str()) + QString(m.diffuse_texname.c_str());
-				renderMaterials[i]->readTextureMap(imgFile, DiffuseMapIndex);
-			}
-			if (m.specular_texname.length() > 0)
-			{
-				QString imgFile = QString(base_dir.c_str()) + QString(m.specular_texname.c_str());
-				renderMaterials[i]->readTextureMap(imgFile, SpecularMapIndex);
-			}
-			if (m.bump_texname.length() > 0)
-			{
-				QString imgFile = QString(base_dir.c_str()) + QString(m.bump_texname.c_str());
-				renderMaterials[i]->readTextureMap(imgFile, BumpMapIndex);
-			}
 		}
 	}
 
@@ -146,59 +97,21 @@ bool BaseSurfaceMesh::readMeshFromObjFormat(const std::string filename, BaseSurf
 
 	std::vector<qeal> faceNormals(3 * facesNum);
 	//alignBuffer
-	std::vector<std::vector<int>> pointTexCoords(pointsNum);
-
-	for (int i = 0; i < facesNum; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			int vid = faceIndices[3 * i + j];
-			int tid = faceTexCoord[3 * i + j];
-			pointTexCoords[vid].push_back(tid);
-		}
-	}
-
-	if (hasTextureCoords)
-	{
-		std::vector<qeal> tempCoords;
-		for (int i = 0; i < pointsNum; i++)
-		{
-			int texId = pointTexCoords[i][0];
-			tempCoords.push_back(texCoords[2 * texId]);
-			tempCoords.push_back(texCoords[2 * texId + 1]);
-			/*if (pointTexCoords[i].size() == 1)
-			{
-				int texId = pointTexCoords[i][0];
-				tempCoords.push_back(texCoords[2 * i]);
-				tempCoords.push_back(texCoords[2 * i + 1]);
-			}else if (pointTexCoords[i].size() > 1)
-			{
-				int texId = pointTexCoords[i][0];
-				tempCoords.push_back(texCoords[2 * i]);
-				tempCoords.push_back(texCoords[2 * i + 1]);
-			}*/
-		}
-		texCoords = tempCoords;
-	}
 
 	////////////////////////////////////
 
 	this->pointsNum = pointsNum;
 	this->facesNum = facesNum;
-	this->renderGroupNum = renderGroupNum;
 
 	pool->totalPointsNum += this->pointsNum;
 	pool->totalFacesNum += this->facesNum;
-	pool->totalRenderGroupNum += this->renderGroupNum;
 
 	registerToOverallBuffer<qeal>(points, pool->pointsBuffer, this->points);
-	registerToOverallBuffer<qeal>(texCoords, pool->texCoordsBuffer, this->texCoords);
 
 	registerToOverallBuffer<qeal>(pointNormals, pool->pointsNormalBuffer, this->pointNormals);
 	registerToOverallBuffer<qeal>(faceNormals, pool->facesNormalBuffer, this->faceNormals);
 	registerToOverallBuffer<int>(faceIndices, pool->faceIndicesBuffer, this->faceIndices);
 	registerToOverallBuffer<int>(pointFaceList, pool->pointFaceListBuffer, this->pointFaceIndices);
-	registerToOverallBuffer<int>(groupFacesNum, pool->groupFacesNumBuffer, this->renderGroupFaceNum);
 	//////////////////////////////////////
 	setNameAndDir(filename);
 	pool->meshNum++;
@@ -221,92 +134,7 @@ bool BaseSurfaceMesh::writeMeshToObjFormat(const std::string filename)
 	
 	for (size_t i = 0; i < pointsNum; i++)
 		fout << "v " << points.buffer[3 * i] << " " << points.buffer[3 * i + 1] << " " << points.buffer[3 * i + 2] << std::endl;
-	if (hasTextureCoords)
-	{
-		for (size_t i = 0; i < (texCoords.span) / 2; i++)
-		{
-			fout << "vt " << texCoords.buffer[2 * i] << " " << texCoords.buffer[2 * i + 1] << std::endl;
-		}
-	}
-
-	int offset = 0;
-	for (size_t i = 0; i < renderGroupNum; i++)
-	{
-		fout << "g group" << i << std::endl;
-		int* ptr = faceIndices.buffer + offset;
-
-		for (size_t f = 0; f < renderGroupFaceNum.buffer[i]; f++)
-		{			
-			fout << "f";
-			int v0 = ptr[3 * f];
-			fout << " " << v0 + 1;
-		//	if(hasTextureCoords)
-		//		fout <<"/"<< 
-			int v1 = ptr[3 * f + 1];
-			fout << " " << v1 + 1;
-		//	if(hasTextureCoords)
-		//		fout <<"/"<< 
-			int v2 = ptr[3 * f + 2];
-			fout << " " << v2 + 1;
-		//	if(hasTextureCoords)
-		//		fout <<"/"<< 
-			fout << std::endl;
-		}
-		offset += renderGroupFaceNum.buffer[i] * 3;
-	}
-
 	return true;
-}
-
-void BaseSurfaceMesh::render(QOpenGLShaderProgram * program, QOpenGLFunctions* f, bool drawEdge)
-{
-	if (_hide)
-		return;
-	updateVBO();
-	_vertexArrayBuf->bind();
-
-	int vertexLocation;
-	int textureLocation;
-	vertexLocation = program->attributeLocation("a_position");
-	textureLocation = program->attributeLocation("a_texcoord");
-	quintptr offset = 0;
-	program->enableAttributeArray(vertexLocation);
-	program->setAttributeBuffer(vertexLocation, GL_QEAL, offset, 3, 3 * sizeof(qeal));
-
-	if (hasTextureCoords)
-	{
-		offset += points.span * sizeof(qeal);
-		program->enableAttributeArray(textureLocation);
-		program->setAttributeBuffer(textureLocation, GL_QEAL, offset, 2, 2 * sizeof(qeal));
-	}
-
-	_vertexArrayBuf->release();
-
-	if(drawEdge)
-		program->setUniformValue("enableLineMode", 1);
-	else program->setUniformValue("enableLineMode", 0);
-
-	program->setUniformValue("useShadowMap", shadow);
-
-	offset = 0;
-	for (int i = 0; i < renderGroupNum; i++)
-	{
-		renderMaterials[i]->transferToShader(program);
-		f->glDrawElements(GL_TRIANGLES, renderGroupFaceNum.buffer[i] * 3, GL_UNSIGNED_INT, faceIndices.buffer + offset);
-		offset += renderGroupFaceNum.buffer[i] * 3;
-	}
-	program->disableAttributeArray(vertexLocation);
-	program->disableAttributeArray(textureLocation);
-}
-
-void BaseSurfaceMesh::updateVBO()
-{
-	if (_type == STATICS_MESH)
-		return;
-	std::copy(points.buffer, points.buffer + points.span, _renderVertexBuffer.begin());
-	_vertexArrayBuf->bind();
-	_vertexArrayBuf->allocate(_renderVertexBuffer.data(), _renderVertexBuffer.size() * sizeof(qeal));
-	_vertexArrayBuf->release();
 }
 
 qeal BaseSurfaceMesh::uniform()
@@ -375,7 +203,6 @@ void BaseSurfaceMesh::translateMesh(const qeal x, const qeal y, const qeal z)
 		points.buffer[3 * i + 1] += y;
 		points.buffer[3 * i + 2] += z;
 	}
-	updateVBO();
 }
 
 void BaseSurfaceMesh::scaleMesh(const qeal s, const qeal cx, const qeal cy, const qeal cz)
@@ -386,7 +213,6 @@ void BaseSurfaceMesh::scaleMesh(const qeal s, const qeal cx, const qeal cy, cons
 		points.buffer[3 * i + 1] = (points.buffer[3 * i + 1] - cy) * s + cy;
 		points.buffer[3 * i + 2] = (points.buffer[3 * i + 2] - cz) * s + cz;
 	}
-	updateVBO();
 }
 
 void BaseSurfaceMesh::rotateMesh(const qglviewer::Quaternion oldR, const qglviewer::Quaternion R, const qeal cx, const qeal cy, const qeal cz)
@@ -401,33 +227,6 @@ void BaseSurfaceMesh::rotateMesh(const qglviewer::Quaternion oldR, const qglview
 		points.buffer[3 * i + 1] = pos.y + cy;
 		points.buffer[3 * i + 2] = pos.z + cz;
 	}
-	updateVBO();
-}
-
-void BaseSurfaceMesh::initVBO()
-{
-	_renderVertexBuffer.resize(points.span + texCoords.span);
-
-	std::copy(points.buffer, points.buffer + points.span, _renderVertexBuffer.begin());
-	if(hasTextureCoords)
-		std::copy(texCoords.buffer, texCoords.buffer + texCoords.span, _renderVertexBuffer.begin() + points.span);
-	_vertexArrayBuf->bind();
-	_vertexArrayBuf->allocate(_renderVertexBuffer.data(), _renderVertexBuffer.size() * sizeof(qeal));
-	_vertexArrayBuf->release();
-}
-
-void BaseSurfaceMeshBuffer::copySurfacePointsToBuffer(qeal* buffer, int size)
-{
-	if(size == 0)
-		std::copy(points.buffer, points.buffer + points.span, buffer);	
-	else std::copy(points.buffer, points.buffer + size, buffer);
-}
-
-void BaseSurfaceMeshBuffer::copyBufferToSurfacePoints(qeal* buffer, int size)
-{
-	if (size == 0)
-		std::copy(buffer, buffer + points.span, points.buffer);
-	else std::copy(buffer, buffer + size, points.buffer);
 }
 
 Vector3 BaseSurfaceMeshBuffer::getSurfacePoint(int nid)

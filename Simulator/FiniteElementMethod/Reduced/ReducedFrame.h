@@ -1,7 +1,7 @@
 #pragma once
 #ifndef FINITE_ELEMENT_METHOD_REDUCED_FRAME_H
 #define FINITE_ELEMENT_METHOD_REDUCED_FRAME_H
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
 
 namespace FiniteElementMethod
 {

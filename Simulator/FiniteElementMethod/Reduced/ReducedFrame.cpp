@@ -1,4 +1,4 @@
-#include "ReducedFrame.h"
+#include "Simulator/FiniteElementMethod/Reduced/ReducedFrame.h"
 #include <iostream>
 
 void FiniteElementMethod::ReducedFrame::projectFullspaceP(qeal * P, qeal w, qeal * oriP)

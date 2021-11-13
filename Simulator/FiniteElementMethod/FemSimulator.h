@@ -4,8 +4,8 @@
 
 #include "Simulator/BaseSimulator.h"
 #include "Commom/FileIO.h"
-#include "MatrixCore.h"
-#include "FemModel.h"
+#include "Commom/MatrixCore.h"
+#include "Simulator/FiniteElementMethod/FemModel.h"
 #include "Commom/SparseMatrixTopology.h"
 #include "ImplicitNewMarkSolverConfig.h"
 #include "Commom/PolynomialSolver.h"

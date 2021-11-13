@@ -1,28 +1,9 @@
-#include "BaseModel.h"
-
-BaseModel::BaseModel():_valid(false),
-	_tx(0),_ty(0),_tz(0),_scale(1.0),_rx(0),_ry(0), _rz(0), _rsita(0), enableGravity(true)
-{
-
-}
-
-BaseModel::~BaseModel()
-{
-
-}
-
-void BaseModel::refreshBuffer(BaseSurfaceMeshBufferPool* sPool, BaseTetMeshBufferPool* tPool, BaseMedialMeshBufferPool* mPool)
-{
-	((BaseSurfaceMesh*)this)->refresh(sPool);
-	if(isTetMeshValid()) ((BaseTetMesh*)this)->refresh(tPool);
-	if(isMedialMeshValid()) ((BaseMedialMesh*)this)->refresh(mPool);
-}
+#include "Model/BaseModel.h"
 
 void BaseModel::init()
 {	
 	computeBBox();
 	uniform();
-	initVBO();
 }
 
 void BaseModel::initMeshesHandel()

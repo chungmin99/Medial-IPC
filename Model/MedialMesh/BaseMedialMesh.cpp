@@ -1,6 +1,8 @@
 #include "BaseMedialMesh.h"
 #include "Commom/FileIO.h"
 #include "Commom/GeometryComputation.h"
+#include <QOpenGLFunctions>
+#include <QGLViewer/qglviewer.h>
 
 void BaseMedialMeshBuffer::copyMedialPointsToBuffer(qeal* buffer, int size)
 {

@@ -6,9 +6,9 @@
 #include <vector>
 #include "Commom/BufferSerialization.h"
 #include "BaseTetMeshBufferPool.h"
-#include <QGLViewer/vec.h>
-#include <QGLViewer/quaternion.h>
-#include "MatrixCore.h"
+#include "Commom/MatrixCore.h"
+#include <QOpenGLFunctions>
+#include <QGLViewer/qglviewer.h>
 
 class BaseTetMeshBuffer
 {

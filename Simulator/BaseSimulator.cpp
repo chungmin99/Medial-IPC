@@ -97,11 +97,6 @@ bool BaseSimulator::addModelFromFile(std::vector<std::string> files, BaseModel* 
 		}
 	}
 
-	for (int i = 0; i < models.size(); i++)
-	{
-		models[i]->refreshBuffer(this, this, this);
-	}
-
 	if (model->isValid())
 	{
 		model->init();
@@ -200,10 +195,6 @@ bool BaseSimulator::addStaticModelFromFile(std::vector<std::string> files, BaseM
 		}
 	}
 
-	for (int i = 0; i < staticModels.size(); i++)
-	{
-		staticModels[i]->refreshBuffer(&staticModelPool, &staticModelPool, &staticModelPool);
-	}
 	if (model->isValid())
 	{
 		model->init();
@@ -250,37 +241,6 @@ void BaseSimulator::saveFile()
 
 void BaseSimulator::saveSimulator()
 {
-}
-
-void BaseSimulator::render(QOpenGLShaderProgram * program, QOpenGLFunctions * f, bool drawEdge)
-{
-	for (int i = 0; i < models.size(); i++)
-	{
-		models[i]->render(program, f, drawEdge);
-	}
-
-	for (int i = 0; i < staticModels.size(); i++)
-	{
-		staticModels[i]->render(program, f, drawEdge);
-	}
-}
-
-void BaseSimulator::renderExtraElementOnCPU(QOpenGLFunctions * f)
-{	
-	for (int i = 0; i < models.size(); i++)
-	{
-		if (!((BaseTetMesh*)models[i])->isHide() && ((BaseTetMesh*)models[i])->isTetMeshValid())
-			models[i]->getTetMeshHandle()->renderTetMesh(f);
-
-		if (!((BaseMedialMesh*)models[i])->isHide() && ((BaseMedialMesh*)models[i])->isMedialMeshValid())
-			models[i]->getMedialMeshHandle()->renderMedialMesh(f);
-	}
-
-	for (int i = 0; i < staticModels.size(); i++)
-	{
-		if (!((BaseMedialMesh*)staticModels[i])->isHide() && ((BaseMedialMesh*)staticModels[i])->isMedialMeshValid())
-			staticModels[i]->getMedialMeshHandle()->renderMedialMesh(f);
-	}
 }
 
 void BaseSimulator::handleTetPointsConstraint()

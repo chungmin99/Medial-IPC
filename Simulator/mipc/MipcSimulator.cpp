@@ -515,7 +515,10 @@ void MIPC::MipcSimulator::computeSystemUsingCusolverSparseChol(qeal* devSys, int
 
 void MIPC::MipcSimulator::initialization()
 {
+	printf("femsimulator initialization..."); fflush(stdout);
 	FemSimulator::initialization();
+	printf("done\n"); fflush(stdout);
+
 	_sysReducedDim = 0;
 	_sysReducedOffsetByModel.resize(models.size());
 
@@ -524,6 +527,7 @@ void MIPC::MipcSimulator::initialization()
 	_quadraticFramesNum = 0;
 	for (size_t mid = 0; mid < models.size(); mid++)
 	{
+		printf("Reading model %d\n", mid); fflush(stdout);
 		MipcModel* m = getModel(mid);
 		std::string frameFilename = m->dir + "frames.dofs";
 		m->readFrameMatList(frameFilename);
@@ -541,6 +545,7 @@ void MIPC::MipcSimulator::initialization()
 		_quadraticFramesNum += m->getQuadraticFramesNum();
 		_translationFramesNum += m->getTranslationFramesNum();
 	}
+	printf("Finished reading models\n"); fflush(stdout);
 	_nonStaticFramesNum = _linearFramesNum + _quadraticFramesNum + _translationFramesNum;
 
 	_sysReducedMatrix.resize(_sysReducedDim, _sysReducedDim);

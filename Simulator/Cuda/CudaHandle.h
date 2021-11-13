@@ -1,7 +1,7 @@
 #pragma once
 #ifndef CudaHanlde_H__
 #define CudaHanlde_H__
-#include "DataCore.h"
+#include "Commom/DataCore.h"
 #include <cuda_runtime.h>
 #include "device_launch_parameters.h"
 #include <cuda_runtime_api.h>

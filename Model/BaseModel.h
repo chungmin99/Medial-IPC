@@ -10,10 +10,8 @@
 class BaseModel : public BaseSurfaceMesh, public BaseTetMesh, public BaseMedialMesh
 {
 public:
-	BaseModel();
-	~BaseModel();
-
-	virtual void refreshBuffer(BaseSurfaceMeshBufferPool* sPool, BaseTetMeshBufferPool* tPool, BaseMedialMeshBufferPool* mPool);
+	BaseModel():_valid(false), _tx(0),_ty(0),_tz(0),_scale(1.0),_rx(0),_ry(0), _rz(0), _rsita(0), enableGravity(true){};
+	~BaseModel(){};
 
 	virtual void init();
 	virtual void initMeshesHandel();
@@ -53,14 +51,6 @@ public:
 	BaseMedialMeshHandle* getMedialMeshHandle() {
 		return _mmHandle;
 	}
-
-	//
-	// UI
-	virtual void clickModelList(){}
-	virtual void clickTetElementSetList(int id) {}
-	virtual void clickMedialMeshSetList(int id) {}
-	//
-
 
 	std::vector<int> tetMeshInterpolationIndices;
 	std::vector<qeal> tetMeshInterpolationWeight;

@@ -1,8 +1,13 @@
-#include "SimFramework.h"
-#include <QtWidgets/QApplication>
+#include "Commom/tinyxml/tinyxml.h"
 #include "Commom/PolynomialSolver.h"
 
+#include "Simulator/BaseSimulator.h"
+#include "Simulator/mipc/MipcSimulator.h"
+#include "Simulator/SimulatorFactor.h"
+
 bool detectCudaDevice(double& gpu_mem);
+BaseSimulator* importFromConfigFile(const std::string filename);
+BaseSimulator* readSimulatorConfigFile(TiXmlElement* subItem);
 
 int main(int argc, char *argv[])
 {
@@ -10,18 +15,88 @@ int main(int argc, char *argv[])
 	if (!detectCudaDevice(gpu_mem))
 		return 0;
 
-	QApplication a(argc, argv);
-	SimFramework w;
-	BaseMainWidget* simWidget = new BaseMainWidget();
-	simWidget->connectUI(&w);
+	printf("Reading config file..."); fflush(stdout);
+	BaseSimulator* sim = importFromConfigFile("../example/test/test.xml");
+	printf("done\n"); fflush(stdout);
 
-	BaseSimulator* sim = new BaseSimulator();
-	simWidget->getCenteralScene()->bindSimulator(sim);
+	printf("Initializing simulator..."); fflush(stdout);
+	sim->initialization();
+	printf("done\n"); fflush(stdout);
 
-	w.setWindowTitle("Sim Framework");
-	w.setWindowIcon(QIcon("./window_ico.ico"));
-	w.showMaximized();
-	return a.exec();
+	printf("Running simulator...\n"); fflush(stdout);
+	for (int frame = 0; frame < 50; frame++) {
+		auto start = std::chrono::system_clock::now();
+		sim->run(frame);
+		auto end = std::chrono::system_clock::now();
+
+		std::chrono::duration<double> elapsed_seconds = end-start;
+		std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+		std::cout << "finished computation at " << std::ctime(&end_time)
+				<< "elapsed time: " << elapsed_seconds.count() << "s\n";
+	}
+	printf("done\n"); fflush(stdout);
+}
+
+BaseSimulator* importFromConfigFile(const std::string filename)
+{
+	TiXmlDocument doc(filename.c_str());
+	doc.LoadFile();
+	if (doc.Error() && doc.ErrorId() == TiXmlBase::TIXML_ERROR_OPENING_FILE) {
+		std::cout << "Error: can't read config file !" << std::endl;
+		return nullptr;
+	}
+	TiXmlElement* headerItem = doc.FirstChildElement();
+	if (!headerItem)
+		return nullptr;
+	std::string checkItemName = headerItem->Value();
+	if (checkItemName != std::string("SimFramework"))
+		return nullptr;
+
+	// readSimulator
+	BaseSimulator *sim = readSimulatorConfigFile(headerItem);
+
+	// read OtherInfo
+	TiXmlElement* subItem = headerItem->FirstChildElement();
+
+	while (subItem)
+	{
+		if (!readSimulatorFromConfigFile(sim, filename, subItem))
+		{
+			std::cout << "Error: can't read config file !!!" << std::endl;
+			return nullptr;
+		}
+		subItem = subItem->NextSiblingElement();
+	}
+	return sim;
+}
+
+BaseSimulator* readSimulatorConfigFile(TiXmlElement* subItem)
+{
+	TiXmlAttribute * attri = subItem->FirstAttribute();
+	std::string simName;
+	std::string runPlaformName;
+	while (attri)
+	{
+		std::string attriName = attri->Name();
+		if (attriName == std::string("name"))
+		{
+			simName = attri->Value();
+		}
+		else if (attriName == std::string("run"))
+		{
+			runPlaformName = attri->Value();
+		}
+		attri = attri->Next();
+	}
+
+	RunPlatform run = RunPlatform::CPU;
+	if (runPlaformName == "OPEMMP")
+		run = RunPlatform::OPEMMP;
+	else if (runPlaformName == "CUDA")
+		run = RunPlatform::CUDA;
+
+	return createSimulator(simName, run);
 }
 
 bool detectCudaDevice(double& gpu_mem)

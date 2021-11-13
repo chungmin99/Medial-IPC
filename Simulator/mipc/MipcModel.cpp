@@ -13,9 +13,7 @@ namespace MIPC
 		for (int i = 0; i < weight.cols(); i++)
 		{
 			VectorX col = weight.col(i);
-			QString frameIdStr;
-			frameIdStr.setNum(i);
-			std::string setName = "F" + frameIdStr.toStdString() + "_elements_set";
+			std::string setName = "F" + std::to_string(i) + "_elements_set";
 			BaseTetElementSet set(setName);
 			for (int j = 0; j < tetPointsNum; j++)
 			{

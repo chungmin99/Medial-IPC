@@ -4,7 +4,7 @@ set(CMAKE_SYSTEM_VERSION 10.0.17763.0 CACHE STRING "" FORCE)
 
 project(SimFramework CXX CUDA)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake/cmake_modules)
 
 # find_package(MKL REQUIRED)
 set(BLA_VENDOR Intel10_64lp)
@@ -88,32 +88,17 @@ set(PROJECT_NAME SimFramework)
 ################################################################################
 # Source groups
 ################################################################################
-set(no_group_source_files
-    "cpp.hint"
-)
-source_group("" FILES ${no_group_source_files})
-
-set(Header_Files
-    "resource.h"
-)
-source_group("Header Files" FILES ${Header_Files})
-
 set(Source_Files
-    "DataCore.h"
     "main.cpp"
-    "MatrixCore.h"
-    "SimFramework.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 
 set(Source_Files__Common
+    "Commom/DataCore.h"
+    "Commom/MatrixCore.h"
     "Commom/AutoFlipSVD.h"
-    "Commom/BaseFrame.cpp"
-    "Commom/BaseFrame.h"
     "Commom/BufferSerialization.h"
     "Commom/ConvertSparseMatrixToCSR.h"
-    "Commom/DataConversion.cpp"
-    "Commom/DataConversion.h"
     "Commom/EigenMatrixIO.h"
     "Commom/FileIO.h"
     "Commom/GeometryComputation.cpp"
@@ -178,8 +163,6 @@ set(Source_Files__Model__MedialMesh__Cuda
 source_group("Source Files\\Model\\MedialMesh\\Cuda" FILES ${Source_Files__Model__MedialMesh__Cuda})
 
 set(Source_Files__Model__TriangleMesh
-    "Model/TriangleMesh/BaseRenderMaterial.cpp"
-    "Model/TriangleMesh/BaseRenderMaterial.h"
     "Model/TriangleMesh/BaseSurfaceHandle.cpp"
     "Model/TriangleMesh/BaseSurfaceHandle.h"
     "Model/TriangleMesh/BaseSurfaceMesh.cpp"
@@ -213,34 +196,6 @@ set(Source_Files__Model__VolumetricMesh__IsotropicMaterial
     "Model/VolumetricMesh/IsotropicMaterial/VolumetricMeshENuMaterial.h"
 )
 source_group("Source Files\\Model\\VolumetricMesh\\IsotropicMaterial" FILES ${Source_Files__Model__VolumetricMesh__IsotropicMaterial})
-
-set(Source_Files__Scene
-    "Scene/BaseLighting.cpp"
-    "Scene/BaseLighting.h"
-    "Scene/BaseScene.cpp"
-    "Scene/BaseScene.h"
-    "Scene/StandardCamera.cpp"
-    "Scene/StandardCamera.h"
-)
-source_group("Source Files\\Scene" FILES ${Source_Files__Scene})
-
-set(Source_Files__Shader
-    "Shader/ScreenFontType.cpp"
-    "Shader/ScreenFontType.h"
-    "Shader/ShaderProgram.cpp"
-    "Shader/ShaderProgram.h"
-)
-source_group("Source Files\\Shader" FILES ${Source_Files__Shader})
-
-set(Source_Files__Shader__Program
-    "Shader/Program/depth_map.fs"
-    "Shader/Program/depth_map.vs"
-    "Shader/Program/phong_shader_program.fs"
-    "Shader/Program/phong_shader_program.vs"
-    "Shader/Program/text_shader_program.fs"
-    "Shader/Program/text_shader_program.vs"
-)
-source_group("Source Files\\Shader\\Program" FILES ${Source_Files__Shader__Program})
 
 set(Source_Files__Simulator
     "Simulator/BaseSimulator.cpp"
@@ -301,66 +256,6 @@ set(Source_Files__Simulator__mipc
 )
 source_group("Source Files\\Simulator\\mipc" FILES ${Source_Files__Simulator__mipc})
 
-set(Source_Files__Ui__Form
-    "Ui/Form/BaseSceneSetingListWidget.ui"
-    "Ui/Form/BottomFormWidget.ui"
-    "Ui/Form/ColorSelectionWidget.ui"
-    "Ui/Form/MaterialEditWidget.ui"
-    "Ui/Form/RightFormWidget.ui"
-    "Ui/Form/SimFramework.ui"
-)
-source_group("Source Files\\Ui\\mipc" FILES ${Source_Files__Ui__Form})
-
-# set(Source_Files__Ui
-#     "Ui/colorpanelbtn.h"
-#     "Ui/colorbutton.h"
-#     "Ui/colorpanelhsb.h"
-#     "Ui/BaseBottomWidget.cpp"
-#     "Ui/BaseMainWidget.cpp"
-#     "Ui/BaseMainWidget.h"
-#     "Ui/BaseMaterialEditWidget.cpp"
-#     "Ui/BaseRightWidget.cpp"
-#     "Ui/BaseRightWidget.h"
-#     "Ui/BaseToolBar.cpp"
-#     "Ui/BaseToolBar.h"
-#     "Ui/ColorSelectionPanel.cpp"
-#     "Ui/ColorSelectionPanel.h"
-#     "Ui/MainLayout.cpp"
-#     "Ui/MainLayout.h"
-# )
-# source_group("Source Files\\Ui" FILES ${Source_Files__Ui})
-
-set(UI_SRCS 
-    "Ui/BaseMaterialEditWidget.cpp"
-    "Ui/BaseBottomWidget.cpp"
-    "Ui/BaseMainWidget.cpp"
-    "Ui/BaseRightWidget.cpp"
-    "Ui/BaseToolBar.cpp"
-    "Ui/ColorSelectionPanel.cpp"
-    "Ui/MainLayout.cpp"
-    )
-set(UI_MOC_HDRS 
-    # "Ui/colorpanelbtn.h"
-    # "Ui/colorbutton.h"
-    # "Ui/colorpanelhsb.h"
-    "Ui/BaseMainWidget.h"
-    "Ui/BaseRightWidget.h"
-    "Ui/BaseToolBar.h"
-    "Ui/ColorSelectionPanel.h"
-    "Ui/MainLayout.h"
-    )
-add_definitions(-DQT_THREAD_SUPPORT)
-qt5_wrap_cpp(UI_SRCS ${UI_MOC_HDRS})
-# add_executable(${PROJECT_NAME} ${UI_SRCS} ${UI_CPP_FILES})
-
-set(Source_Files__Resources
-    "Resources/timesbd.ttf"
-    "Resources/timesbi.ttf"
-    "Resources/timesi.ttf"
-    "Resources/times.ttf"
-)
-source_group("Source Files\\Resources" FILES ${Source_Files__Resources})
-
 set(ALL_FILES
     ${no_group_source_files}
     ${Header_Files}
@@ -397,7 +292,7 @@ set(ALL_FILES
 ################################################################################
 # qt5_wrap_cpp(cbtn ${CMAKE_SOURCE_DIR}/Ui/colorbutton.h TARGET ${PROJECT_NAME})
 # add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc" ${cbtn})
-add_executable(${PROJECT_NAME} ${ALL_FILES} "SimFramework.qrc" "icon/ui_icon.qrc")
+add_executable(${PROJECT_NAME} ${ALL_FILES})
 
 # use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 # ################################################################################

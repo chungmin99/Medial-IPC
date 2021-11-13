@@ -56,8 +56,6 @@ public:
 	virtual void saveFile();
 	virtual void saveSimulator();
 	virtual void initialization() {};
-	virtual void render(QOpenGLShaderProgram* program, QOpenGLFunctions* f, bool drawEdge = false);
-	virtual void renderExtraElementOnCPU(QOpenGLFunctions * f);
 	virtual void animate(int frame = 0) { run(frame); postRun(); }
 	virtual void run(int frame = 0) {}
 	virtual void postRun() {};
@@ -69,8 +67,6 @@ public:
 
 	virtual void handleSurfacePointsSelectedEvent(){}
 	virtual void handleTetPointsSelectedEvent(){}
-
-	virtual void handleMouseForce(int nid, qeal& x, qeal& y, qeal& z) { std::cout << " handleMouseForce " << std::endl; }
 
 	virtual void getSurfacePoint(const int id, qeal& x, qeal& y, qeal& z) { x = pointsBuffer.buffer[3 * id];  y = pointsBuffer.buffer[3 * id + 1]; z = pointsBuffer.buffer[3 * id + 2];}
 	virtual void getTetPoint(const int id, qeal& x, qeal& y, qeal& z) { x = tetPointsBuffer.buffer[3 * id];  y = tetPointsBuffer.buffer[3 * id + 1]; z = tetPointsBuffer.buffer[3 * id + 2]; }
