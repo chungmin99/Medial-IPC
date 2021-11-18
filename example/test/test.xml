@@ -6,7 +6,23 @@
 <SysType> DENSE </SysType>
 <kappa>1000</kappa>
 <dhat>0.001</dhat>
-<object name = "dinosaur_h" volumetric_mesh = "tet" medial_mesh = "mat">
+<!--object name = "dinosaur_h" volumetric_mesh = "tet" medial_mesh = "mat">
+	<scale> 1.0 </scale>
+	<translation> 0 0.5 0 </translation>
+	<rotation> 0.0 0.0 1.0 45.0</rotation>
+	<density> 2.0 </density>
+	<YoungModulus> 1000 </YoungModulus>
+	<Poisson> 0.35 </Poisson>
+</object-->
+<!--object name = "dinosaur_h" volumetric_mesh = "tet" medial_mesh = "mat">
+	<scale> 1.0 </scale>
+	<translation> 0 1.78 0 </translation>
+	<rotation> 0.0 0.0 1.0 45.0</rotation>
+	<density> 2.0 </density>
+	<YoungModulus> 1000 </YoungModulus>
+	<Poisson> 0.35 </Poisson>
+</object-->
+<object name = "cat_sub" volumetric_mesh = "tet" medial_mesh = "ma">
 	<scale> 1.0 </scale>
 	<translation> 0 1.78 0 </translation>
 	<rotation> 0.0 0.0 1.0 45.0</rotation>
@@ -21,7 +37,3 @@
 </static_object>
 </simulator>
 </SimFramework>
-
-
-
-

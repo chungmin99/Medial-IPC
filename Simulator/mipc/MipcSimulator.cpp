@@ -527,7 +527,7 @@ void MIPC::MipcSimulator::initialization()
 	_quadraticFramesNum = 0;
 	for (size_t mid = 0; mid < models.size(); mid++)
 	{
-		printf("Reading model %d\n", mid); fflush(stdout);
+		printf("Reading model %d...", mid); fflush(stdout);
 		MipcModel* m = getModel(mid);
 		std::string frameFilename = m->dir + "frames.dofs";
 		m->readFrameMatList(frameFilename);
@@ -544,8 +544,8 @@ void MIPC::MipcSimulator::initialization()
 		_linearFramesNum += m->getLinearFramesNum();
 		_quadraticFramesNum += m->getQuadraticFramesNum();
 		_translationFramesNum += m->getTranslationFramesNum();
+		printf("done\n", mid); fflush(stdout);
 	}
-	printf("Finished reading models\n"); fflush(stdout);
 	_nonStaticFramesNum = _linearFramesNum + _quadraticFramesNum + _translationFramesNum;
 
 	_sysReducedMatrix.resize(_sysReducedDim, _sysReducedDim);
@@ -587,11 +587,13 @@ void MIPC::MipcSimulator::initialization()
 	std::vector<TripletX> triplet;
 	for (size_t mid = 0; mid < models.size(); mid++)
 	{
+        printf("Getting sparse proj mat..."); fflush(stdout);
 		MipcModel* m = getModel(mid);
 		int rowBufferOffset = m->tetPoints.offset;
 		int colBufferOffset = _sysReducedOffsetByModel[mid];
 
 		m->getGlobalSparseProjectionMatrixTriplet(rowBufferOffset, colBufferOffset, triplet);
+        printf("done\n"); fflush(stdout);
 	}
 
 	_sysReducedSparseProjection.setFromTriplets(triplet.begin(), triplet.end());
@@ -602,8 +604,14 @@ void MIPC::MipcSimulator::initialization()
 	if (_mu > 0)enableFriction = true;
 	tol = 1e-3 * _diagLen;
 
+    printf("Generating overall collision evensts..."); fflush(stdout);
 	genOverallCollisionEvents();
+    printf("done\n"); fflush(stdout);
+
+	printf("Finished reading models\n"); fflush(stdout);
+    printf("Starting init for gpu..."); fflush(stdout);
 	initForGpu();
+    printf("done\n"); fflush(stdout);
 }
 
 void MIPC::MipcSimulator::run(int frame)
@@ -1264,7 +1272,7 @@ void MIPC::MipcSimulator::genOverallInterCollisionEvents(int mid, BaseMedialMesh
 			MipcSlabSphereConstraint* event = new MipcSlabSphereConstraint(collisionEventsList.size(), ns0, ns1, ns2, s, _dHat, _mu, _ev * _timeStep, type);
 			if (event->isActive() || event->distance < 0)
 			{
-				free(event);
+				// free(event);
 				continue;
 			}
 
@@ -1293,7 +1301,7 @@ void MIPC::MipcSimulator::genOverallInterCollisionEvents(int mid, BaseMedialMesh
 			MipcConeConeConstraint* event = new MipcConeConeConstraint(collisionEventsList.size(), cs0, cs1, cs3, cs4, _dHat, _mu, _ev * _timeStep, type);
 			if (event->isActive() || event->distance < 0)
 			{
-				free(event);
+				// free(event);
 				continue;
 			}
 

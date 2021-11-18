@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	BaseSimulator* sim = importFromConfigFile("../example/test/test.xml");
 	printf("done\n"); fflush(stdout);
 
-	printf("Initializing simulator..."); fflush(stdout);
+	printf("Initializing simulator...\n"); fflush(stdout);
 	sim->initialization();
 	printf("done\n"); fflush(stdout);
 

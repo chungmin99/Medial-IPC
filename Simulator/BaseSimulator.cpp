@@ -80,7 +80,7 @@ bool BaseSimulator::addModelFromFile(std::vector<std::string> files, BaseModel* 
 				std::cout << "Warning: can't read tet file ! " << std::endl;
 			}
 			if(format == std::string("node")) tetNodeFilename = files[i];
-			if (format == std::string("ele")) tetElementFilename = files[i];
+			if(format == std::string("ele")) tetElementFilename = files[i];
 		}
 		else if (format == std::string("mat") || format == std::string("ma"))
 		{

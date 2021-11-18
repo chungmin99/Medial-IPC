@@ -241,6 +241,7 @@ namespace MIPC
 
 		rowDim += fixedTetNodesNum;
 		coeffMat.resize(rowDim, colDim);
+        printf("matValue, %d\n", matValue.size());
 		coeffMat.setFromTriplets(matValue.begin(), matValue.end());
 
 		MatrixX weight;
