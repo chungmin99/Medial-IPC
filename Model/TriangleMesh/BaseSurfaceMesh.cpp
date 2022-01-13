@@ -134,6 +134,10 @@ bool BaseSurfaceMesh::writeMeshToObjFormat(const std::string filename)
 	
 	for (size_t i = 0; i < pointsNum; i++)
 		fout << "v " << points.buffer[3 * i] << " " << points.buffer[3 * i + 1] << " " << points.buffer[3 * i + 2] << std::endl;
+
+	for (size_t i = 0; i < facesNum; i++)
+		fout << "f " << faceIndices.buffer[3 * i] << " " << faceIndices.buffer[3 * i + 1] << " " << faceIndices.buffer[3 * i + 2] << std::endl;
+
 	return true;
 }
 

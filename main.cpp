@@ -1,6 +1,7 @@
 #include "Commom/tinyxml/tinyxml.h"
 #include "Commom/PolynomialSolver.h"
 
+#include "Model/BaseModel.h"
 #include "Simulator/BaseSimulator.h"
 #include "Simulator/mipc/MipcSimulator.h"
 #include "Simulator/SimulatorFactor.h"
@@ -27,7 +28,14 @@ int main(int argc, char *argv[])
 	for (int frame = 0; frame < 50; frame++) {
 		auto start = std::chrono::system_clock::now();
 		sim->run(frame);
+		sim->postRun();
 		auto end = std::chrono::system_clock::now();
+
+		// save model
+		for (auto m = (sim->models).begin(); m != (sim->models).end(); m++) {
+			int index = std::distance((sim->models).begin(), m);
+			(*m)->writeMeshToObjFormat("output_" + std::to_string(frame) + "_" + std::to_string(index) + ".obj");
+		}
 
 		std::chrono::duration<double> elapsed_seconds = end-start;
 		std::time_t end_time = std::chrono::system_clock::to_time_t(end);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10.0 FATAL_ERROR)
 
 set(CMAKE_SYSTEM_VERSION 10.0.17763.0 CACHE STRING "" FORCE)
 
@@ -15,12 +15,13 @@ find_path(BLAS_INCLUDE_DIRS mkl.h
     $ENV{BLAS_HOME}/include)
 
 # need uiplugin and designer
-find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui OpenGL OpenGLExtensions Xml Designer UiPlugin)
+# find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui OpenGL OpenGLExtensions Xml Designer UiPlugin)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui OpenGL OpenGLExtensions Xml)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/Ui/Form ${CMAKE_CURRENT_SOURCE_DIR})
+# set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTOUIC ON)
+# set(CMAKE_AUTORCC ON)
+# set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/Ui/Form ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
@@ -341,7 +342,6 @@ target_include_directories(
     "${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles/$<CONFIG>;"
     "${CMAKE_CURRENT_SOURCE_DIR}/GeneratedFiles;"
     "${CMAKE_CURRENT_SOURCE_DIR}/."
-    "${Qt_INCLUDE_DIRS}"
     "${BLAS_INCLUDE_DIRS}"
 )
 message("${BLAS_INCLUDE_DIRS}")
@@ -392,8 +392,8 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "Qt5::OpenGL;"
     "Qt5::OpenGLExtensions;"
     "Qt5::Gui;"
-    "Qt5::Designer;"
-    "Qt5::UiPlugin;"
+    # "Qt5::Designer;"
+    # "Qt5::UiPlugin;"
     "Eigen3::Eigen;"
     "${FREETYPE_LIBRARIES};"
     "${QGLViewer_LIBRARY};"
